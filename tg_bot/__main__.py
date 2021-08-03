@@ -145,7 +145,8 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(
                     escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 ),
-                parse_mode=ParseMode.MARKDOWN, 
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
