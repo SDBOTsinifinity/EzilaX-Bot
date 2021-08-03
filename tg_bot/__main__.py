@@ -143,15 +143,24 @@ def start(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_photo(
                 TECHNO_IMG,
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="❔ Help ❔",
-                                                                       callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Channel",
-                                                                       url="https://t.me/PrabuXOfficial")],
-                                                                                   [InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
-                                                                       url="t.me/{}?startgroup=true".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Support",
-                                                                       url="https://t.me/PrabuXSupport")
-                                                                                 ]]))
+                parse_mode=ParseMode.MARKDOWN, 
+                      reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕", url="t.me/{}?startgroup=true".format(bot.username)),
+                [
+                    InlineKeyboardButton(
+                        "🙎🏻‍♂ ᴀssɪsᴛᴀɴᴛ", url="https://t.me/SDBOTs_inifinity")], 
+                    InlineKeyboardButton(
+                        "ᴅᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻", url="https://t.me/SDBOTz")
+                ],[
+                    InlineKeyboardButton(
+                        "✨ ᴄʜᴀɴɴᴇʟ ✨", callback_data="help_back".format(bot.username)),
+                ]
+            ]
+        )
+   )
 
     else:
         update.effective_message.reply_text("hi, I am now Online")
