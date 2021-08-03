@@ -144,9 +144,8 @@ def start(bot: Bot, update: Update, args: List[str]):
                 TECHNO_IMG,
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[
-                                                                                   InlineKeyboardButton(text="➕ Add To Me Your Group", url="t.me/{}?startgroup=true".format(bot.username)
-                                                                               ],[
-                                                                                   InlineKeyboardButton(text="Channel",
+                                                                                   InlineKeyboardButton(text="➕ Add To Me Your Group", url="t.me/{}?startgroup=true".format(bot.username)],
+                                                                                   [InlineKeyboardButton(text="Channel",
                                                                        url="https://t.me/SDBOTs_inifinity"),
                                                                                    InlineKeyboardButton(text="❔ Help ❔",
                                                                        callback_data="help_back".format(bot.username)
