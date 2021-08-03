@@ -147,13 +147,13 @@ def start(bot: Bot, update: Update, args: List[str]):
                       reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕", 
                       url="t.me/{}?startgroup=true".format(bot.username)),
-                [
-                    InlineKeyboardButton(text="🙎🏻‍♂ ᴀssɪsᴛᴀɴᴛ", 
+                    [InlineKeyboardButton(text="🙎🏻‍♂ ᴀssɪsᴛᴀɴᴛ", 
                       url="https://t.me/SDBOTs_inifinity")], 
                     InlineKeyboardButton(text="ᴅᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻", 
                       url="https://t.me/SDBOTz")],
                     [InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨", 
-                      callback_data="help_back".format(bot.username)]]))
+                      callback_data="help_back".format(bot.username)
+                           ]]))
 
     else:
         update.effective_message.reply_text("hi, I am now Online")
