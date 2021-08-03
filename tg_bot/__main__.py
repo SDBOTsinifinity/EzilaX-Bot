@@ -148,8 +148,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                                                                                    [InlineKeyboardButton(text="Channel",
                                                                        url="https://t.me/SDBOTs_inifinity"),
                                                                                    InlineKeyboardButton(text="❔ Help ❔",
-                                                                       callback_data="help_back".format(bot.username)
-                                                                               ],[
+                                                                       callback_data="help_back".format(bot.username)),
                                                                                    InlineKeyboardButton(text="Our Bots",
                                                                        url="https://t.me/SDBOTz")
                                                                                  ]]))
