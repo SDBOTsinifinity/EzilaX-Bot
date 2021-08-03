@@ -16,59 +16,79 @@ sites_list = {
 }
 
 
-START_TIME = datetime.utcnow()
-START_TIME_ISO = START_TIME.replace(microsecond=0).isoformat()
-TIME_DURATION_UNITS = (
-    ('week', 60 * 60 * 24 * 7),
-    ('day', 60 * 60 * 24),
-    ('hour', 60 * 60),
-    ('min', 60),
-    ('sec', 1)
-)
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
 
-async def _human_time_duration(seconds):
-    if seconds == 0:
-        return 'inf'
-    parts = []
-    for unit, div in TIME_DURATION_UNITS:
-        amount, seconds = divmod(int(seconds), div)
-        if amount > 0:
-            parts.append('{} {}{}'
-                         .format(amount, unit, "" if amount == 1 else "s"))
-    return ', '.join(parts)
+    while count < 4:
+        count += 1
+        if count < 3:
+            remainder, result = divmod(seconds, 60)
+        else:
+            remainder, result = divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
 
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
 
-@Client.on_message(command(["start", f"start@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
-async def start(client: Client, message: Message):
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    await message.reply_text(
-        f"""Saya Sedang Online!\n<b>Waktu Online:</b> `{uptime}`""",
-        
+    time_list.reverse()
+    ping_time += ":".join(time_list)
 
-@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
-async def ping_pong(client: Client, m: Message):
-    start = time()
-    m_reply = await m.reply_text("Pinging...")
-    delta_ping = time() - start
-    await m_reply.edit_text(
-        f"{emoji.PING_PONG} **PONG!!**\n"
-        f"`{delta_ping * 1000:.3f} ms`"
-    )
+    return ping_time
 
 
-@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
-@authorized_users_only
-async def get_uptime(client: Client, m: Message):
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
-    await m.reply_text(
-        f"{emoji.ROBOT} Saya Masih Aktif\n"
-        f"• **Waktu aktif:** `{uptime}`\n"
-        f"• **Waktu mulai:** `{START_TIME_ISO}`"
-    )
+def ping_func(to_ping: List[str]) -> List[str]:
+    ping_result = []
+
+    for each_ping in to_ping:
+
+        start_time = time.time()
+        site_to_ping = sites_list[each_ping]
+        r = requests.get(site_to_ping)
+        end_time = time.time()
+        ping_time = str(round((end_time - start_time), 2)) + "s"
+
+        pinged_site = f"<b>{each_ping}</b>"
+
+        if each_ping is "calculating..." or each_ping is "calculating..":
+            pinged_site = f'<a href="{sites_list[each_ping]}">{each_ping}</a>'
+            ping_time = f"<code>{ping_time} (Status: {r.status_code})</code>"
+
+        ping_text = f"{pinged_site}: <code>{ping_time}</code>"
+        ping_result.append(ping_text)
+
+    return ping_result
+
+
+@run_async
+def ping(bot: Bot, update: Update):
+    telegram_ping = ping_func(["Telegram"])[0].split(": ", 1)[1]
+    uptime = get_readable_time((time.time() - StartTime))
+
+    reply_msg = ("PONG!!\n"
+                 "<b>Time Taken:</b> <code>{}</code>\n"
+                 "<b>Service uptime:</b> <code>{}</code>".format(telegram_ping, uptime))
+
+    update.effective_message.reply_text(reply_msg, parse_mode=ParseMode.HTML)
+
+
+@run_async
+def pingall(bot: Bot, update: Update):
+    to_ping = ["Kaizoku", "Kayo", "Telegram", "Jikan"]
+    pinged_list = ping_func(to_ping)
+    pinged_list.insert(2, '')
+    uptime = get_readable_time((time.time() - StartTime))
+
+    reply_msg = "⏱Ping results are:\n"
+    reply_msg += "\n".join(pinged_list)
+    reply_msg += '\n<b>Service uptime:</b> <code>{}</code>'.format(uptime)
 
     update.effective_message.reply_text(reply_msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
 
