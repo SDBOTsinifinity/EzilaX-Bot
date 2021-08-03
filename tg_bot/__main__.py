@@ -26,9 +26,14 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 PM_START_TEXT = """
-**Hello {}, My Name is {}! 
-I am an ADVANCE group management bot.
-You can find the list of available commands with /help.**
+*Hallo {}, Nama saya {}!
+Dikelolah oleh [sᴛᴇᴠᴀɴ](https://t.me/GZ_056)
+┈───────────────────┈
+Saya adalah robot manajemen bertemakan anime dragon ball,
+Saya disini untuk membantu anda untuk melindungi grup anda dari para pengguna telegram yang meresahkan,
+Dengan jurus super kamehameha saya bisa membasmi mereka semua dengan sangat mudah
+┈───────────────────┈
+🔻 Silahkan klik tombol bantuan untuk mendapatkan informasi*
 """
 
 HELP_STRINGS = """
