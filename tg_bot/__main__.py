@@ -25,22 +25,21 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 
-PM_START_TEXT = """**Hallo {message.from_user.mention} Nama saya [{}](https://t.me/PrabuXRobot)\n
-Saya Adalah Bot Canggih Yang Dibuat Untuk Memutar Musik Di Obrolan Suara Grup Telegram\n
-Ketik » /help « Untuk Melihat Daftar Perintah Saya!
-**"""
-
+PM_START_TEXT = """
+**Hello {}, My Name is {}! 
+I am an **ADVANCE**  group management bot.
+You can find the list of available commands with /help.**
 """
-Hey there! My name is *{}*.
-I'm a Hero For Fun and help admins manage their groups with One Punch! Have a look at the following for an idea of some of \
-the things I can help you with.
+
+HELP_STRINGS = """
+Hello! my name *{}*.
 *Main* commands available:
- • /help: PM's you this message.
- • /help <module name>: PM's you info about that module.
- • /donate: information on how to donate!
- • /settings:
-   • in PM: will send you your settings for all supported modules.
-   • in a group: will redirect you to pm, with all that chat's settings.
+ - /start: start the bot
+ - /help: PM's you this message.
+ - /help <module name>: PM's you info about that module.
+ - /settings:
+   - in PM: will send you your settings for all supported modules.
+   - in a group: will redirect you to pm, with all that chat's settings.
 
 
 {}
