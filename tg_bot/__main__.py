@@ -25,10 +25,10 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 
-PM_START_TEXT = f"""<b>Hallo {message.from_user.mention} Nama saya [{}](https://t.me/PrabuXRobot)\n
+PM_START_TEXT = """**Hallo {message.from_user.mention} Nama saya [{}](https://t.me/PrabuXRobot)\n
 Saya Adalah Bot Canggih Yang Dibuat Untuk Memutar Musik Di Obrolan Suara Grup Telegram\n
 Ketik » /help « Untuk Melihat Daftar Perintah Saya!
-</b>"""
+**"""
 
 """
 Hey there! My name is *{}*.
