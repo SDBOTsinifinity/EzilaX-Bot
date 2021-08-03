@@ -26,18 +26,16 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 PM_START_TEXT = """
-*Hallo {}, Nama saya {}!
-Dikelolah oleh [sᴛᴇᴠᴀɴ](https://t.me/GZ_056)
-┈───────────────────┈
-Saya adalah robot manajemen bertemakan anime dragon ball,
-Saya disini untuk membantu anda untuk melindungi grup anda dari para pengguna telegram yang meresahkan,
-Dengan jurus super kamehameha saya bisa membasmi mereka semua dengan sangat mudah
-┈───────────────────┈
-🔻 Silahkan klik tombol bantuan untuk mendapatkan informasi*
+**Hello {}, My Name is {}!** 
+I am an **ADVANCE**  group management bot.
+You can find the list of available commands with /help.
+
 """
 
 HELP_STRINGS = """
+
 Hello! my name *{}*.
+
 *Main* commands available:
  - /start: start the bot
  - /help: PM's you this message.
@@ -142,14 +140,15 @@ def start(bot: Bot, update: Update, args: List[str]):
                 TECHNO_IMG,
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="❔ Help ❔",
-                                                                       callback_data="help_back".format(bot.username))],
-                                                                                  InlineKeyboardButton(text="Channel",
+                                                                       callback_data="help_back".format(bot.username)),
+                                                                                   InlineKeyboardButton(text="Channel",
                                                                        url="https://t.me/SDBOTs_inifinity")],
-                                                                                  InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
+                                                                                   [InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
                                                                        url="t.me/{}?startgroup=true".format(bot.username)),
-                                                                                  InlineKeyboardButton(text="Our Bots",
+                                                                                   InlineKeyboardButton(text="Our Bots",
                                                                        url="https://t.me/SDBOTz")
                                                                                  ]]))
+
     else:
         update.effective_message.reply_text("hi, I am now Online")
 
@@ -518,4 +517,4 @@ def main():
 
 if __name__ == '__main__':
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
-    main() 
+    main()
