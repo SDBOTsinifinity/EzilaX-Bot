@@ -150,28 +150,14 @@ def start(bot: Bot, update: Update, args: List[str]):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton(
-                                text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕",
-                                url="t.me/{}?startgroup=true".format(
-                                     bot.username,
-                                ),
-                            ),
+                            InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕", url="t.me/PrabuXRobot?startgroup=start"),
                         ],
                         [
-                            InlineKeyboardButton(
-                                text="⚔ ʙᴀɴᴛᴜᴀɴ",
-                                callback_data="help_back".format(
-                                      bot.username,
-                                ),
-                            ),
-                            InlineKeyboardButton(
-                                text="sᴜᴘᴘᴏʀᴛ 💬",
-                                url="https://t.me/PrabuXSupport"
+                            InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ", callback_data="help_back"),
+                            InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬", url="https://t.me/PrabuXSupport"
                             ),
                         ],
-                    ],
-                ),
-            ),
+                    ]
 
     else:
         update.effective_message.reply_text("hi, I am now Online")
