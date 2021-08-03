@@ -155,8 +155,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                         "sᴜᴘᴘᴏʀᴛ 💬", url=f"https://t.me/PrabuXSupport")
                 ],[
                     InlineKeyboardButton(
-                        "⚔ ʙᴀɴᴛᴜᴀɴ ⚔", callback_data="help_back".format(bot.username)
-                  ]
+                        "⚔ ʙᴀɴᴛᴜᴀɴ ⚔", callback_data="help_back".format(bot.username)]
               ]
           )
       )
