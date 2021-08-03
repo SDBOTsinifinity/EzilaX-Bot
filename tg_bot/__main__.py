@@ -141,16 +141,47 @@ def start(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_photo(
                 TECHNO_IMG,
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="❔ Help ❔",
-                                                                       callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Channel",
-                                                                       url="https://t.me/SDBOTs_inifinity")],
-                                                                                   [InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
-                                                                       url="t.me/{}?startgroup=true".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Our Bots",
-                                                                       url="https://t.me/SDBOTz")
-                                                                                 ]]))
-
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="💫 ᴛᴀᴍʙᴀʜᴋᴀɴ 𝗣𝗥𝗔𝗕𝗨 ᴋᴇ ɢʀᴜᴘ 💫",
+                                url="t.me/{}?startgroup=true".format(
+                                    context.bot.username,
+                                ),
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="⚔ ʙᴀɴᴛᴜᴀɴ",
+                                callback_data="help_back".format(bot.username)),
+                            ),
+                            InlineKeyboardButton(
+                                text="sᴜᴘᴘᴏʀᴛ 💬",
+                                url="https://t.me/{SUPPORT_CHAT}",
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="🧾 Getting Started",
+                                url="https://t.me/OnePunchUpdates/29",
+                            ),
+                            InlineKeyboardButton(
+                                text="🗄 Source code",
+                                url="https://github.com/AnimeKaizoku/SaitamaRobot",
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="☠️ Kaizoku Network",
+                                url="https://t.me/Kaizoku/4",
+                            ),
+                        ],
+                    ],
+                ),
+            )
     else:
         update.effective_message.reply_text("hi, I am now Online")
 
