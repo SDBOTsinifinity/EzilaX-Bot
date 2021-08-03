@@ -27,7 +27,7 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 *👋🏻 Hallo, Nama saya {}! 
-Dikelolah oleh [sᴛᴇᴠᴀɴ](t.me/GZ_056)
+Dikelolah oleh [sᴛᴇᴠᴀɴ](https://t.me/{OWNER_USENAME})
 ┈───────────────────┈
 Saya adalah robot manajemen bertemakan Harimau Jawa,
 Saya disini untuk membantu anda melindungi grup anda dari para pengguna telegram yang meresahkan,
