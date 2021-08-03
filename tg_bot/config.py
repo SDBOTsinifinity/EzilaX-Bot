@@ -24,6 +24,7 @@ class Config(object):
     NO_LOAD = ['translation', 'rss']   
     WEBHOOK = False
     URL = None
+    SPAMWATCH_SUPPORT_CHAT = "@SpamWatchSupport"
 
     # OPTIONAL
     #ID Seperation format [1,2,3,4]
