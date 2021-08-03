@@ -143,14 +143,14 @@ def start(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_photo(
                 TECHNO_IMG,
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[
-                                                                                   InlineKeyboardButton(text="➕ Add To Me Your Group", url="t.me/{}?startgroup=true".format(bot.username),
-                                                                                   [InlineKeyboardButton(text="Channel",
-                                                                       url="https://t.me/SDBOTs_inifinity"),
-                                                                                   InlineKeyboardButton(text="❔ Help ❔",
-                                                                       callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Our Bots",
-                                                                       url="https://t.me/SDBOTz")
+                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕",
+                                                                       callback_data=t.me/{}?startgroup=true".format(bot.username")),
+                                                                                   InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨",
+                                                                       url="https://t.me/PrabuXOfficial")],
+                                                                                   [InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ",
+                                                                       url=help_back".format(bot.username")),
+                                                                                   InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
+                                                                       url="https://t.me/PrabuXSupport")
                                                                                  ]]))
 
     else:
