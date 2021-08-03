@@ -26,7 +26,7 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 PM_START_TEXT = """
-*👋🏻 Hallo, Nama saya {}! 
+*👋🏻 Hallo {}, Nama saya 𝗣𝗥𝗔𝗕𝗨! 
 ┈───────────────────┈
 Saya adalah robot manajemen bertemakan Harimau Jawa,
 Saya disini untuk membantu anda melindungi grup anda dari para pengguna telegram yang meresahkan,
