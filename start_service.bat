@@ -24,5 +24,5 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 :--------------------------------------
-net stop phantomRobot
-net start phantomRobot
+net stop tg_bot
+net start tg_bot
