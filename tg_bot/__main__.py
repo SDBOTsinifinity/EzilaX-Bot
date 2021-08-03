@@ -27,12 +27,10 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
 *Hallo {}, Nama saya {}!
-Dikelolah oleh [sᴛᴇᴠᴀɴ](https://t.me/GZ_056)
-┈───────────────────┈
+Dikelolah oleh [sᴛᴇᴠᴀɴ](https://t.me/GZ_056)/n┈───────────────────┈/n
 Saya adalah robot manajemen bertemakan anime dragon ball,
 Saya disini untuk membantu anda untuk melindungi grup anda dari para pengguna telegram yang meresahkan,
-Dengan jurus super kamehameha saya bisa membasmi mereka semua dengan sangat mudah
-┈───────────────────┈
+Dengan jurus super kamehameha saya bisa membasmi mereka semua dengan sangat mudah/n┈───────────────────┈/n
 🔻 Silahkan klik tombol bantuan untuk mendapatkan informasi*
 """
 
