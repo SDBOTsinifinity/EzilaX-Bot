@@ -147,7 +147,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                                                                        url="t.me/{}?startgroup=true".format(bot.username),
                                                                                    InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ",
                                                                        callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
+                                                                                   [InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
                                                                        url="https://t.me/PrabuXSupport")
                                                                                  ]]))
 
