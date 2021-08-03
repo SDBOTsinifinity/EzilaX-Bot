@@ -1,5 +1,4 @@
 import importlib
-import time
 import re
 import json
 import requests
@@ -25,57 +24,13 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
-def get_readable_time(seconds: int) -> str:
-    count = 0
-    ping_time = ""
-    time_list = []
-    time_suffix_list = ["s", "m", "h", "days"]
-
-    while count < 4:
-        count += 1
-        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
-        if seconds == 0 and remainder == 0:
-            break
-        time_list.append(int(result))
-        seconds = int(remainder)
-
-    for x in range(len(time_list)):
-        time_list[x] = str(time_list[x]) + time_suffix_list[x]
-    if len(time_list) == 4:
-        ping_time += time_list.pop() + ", "
-
-    time_list.reverse()
-    ping_time += ":".join(time_list)
-
-    return ping_time
-
 
 PM_START_TEXT = """
-*👋🏻 Hallo {}, Nama saya 𝗣𝗥𝗔𝗕𝗨! 
-┈───────────────────┈
-Saya adalah robot manajemen bertemakan Harimau Jawa,
-Saya disini untuk membantu anda melindungi grup anda dari para pengguna telegram yang meresahkan,
-Dengan Kujang yg dipegang, saya bisa membasmi mereka semua dengan sangat mudah
-┈───────────────────┈
-🔻 Silahkan klik tombol bantuan untuk mendapatkan informasi*
+**Hello {}, My Name is {}!** 
+I am an **ADVANCE**  group management bot.
+You can find the list of available commands with /help.
 
 """
-
-buttons = [
-    [   InlineKeyboardButton(text="➕ Tambahkan ke grup ➕", url="t.me/GrupManajerBot?startgroup=start"),
-    ],
-    [   InlineKeyboardButton(text="👥 Grup", url="https://t.me/nothingspecialonhere/10"),
-        InlineKeyboardButton(text="Channel 📢", url="https://t.me/nothingspecialonhere/10"),
-    ],
-    [
-        InlineKeyboardButton(text="🔧 Bantuan",callback_data="help_back"),
-        InlineKeyboardButton(text="Informasi 💬",callback_data="aboutmanu_"),   
-    ],
-    [    
-        InlineKeyboardButton(text="🇮🇩 Bahasa 🇮🇩",callback_data="help_back"
-        ),
-    ],
-]
 
 HELP_STRINGS = """
 
@@ -160,25 +115,13 @@ def test(bot: Bot, update: Update):
     print(update.effective_message)
 
 @run_async
-def start(update: Update, context: CallbackContext):
-    args = context.args
-    uptime = get_readable_time((time.time() - StartTime))
+def start(bot: Bot, update: Update, args: List[str]):
     if update.effective_chat.type == "private":
         if len(args) >= 1:
             if args[0].lower() == "help":
                 send_help(update.effective_chat.id, HELP_STRINGS)
-            elif args[0].lower().startswith("ghelp_"):
-                mod = args[0].lower().split("_", 1)[1]
-                if not HELPABLE.get(mod, False):
-                    return
-                send_help(
-                    update.effective_chat.id,
-                    HELPABLE[mod].__help__,
-                    InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
-                    ),
-                )
-
+            elif args[0].lower() == "disasters":
+                IMPORTED["disasters"].send_disasters(update)
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
                 chat = dispatcher.bot.getChat(match.group(1))
@@ -192,30 +135,21 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            update.effective_message.reply_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-            )
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_photo(
+                TECHNO_IMG,
+                PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
+                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="❔ Help ❔",
+                                                                       callback_data="help_back".format(bot.username)),
+                                                                                   InlineKeyboardButton(text="Channel",
+                                                                       url="https://t.me/SDBOTs_inifinity")],
+                                                                                   [InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
+                                                                       url="t.me/{}?startgroup=true".format(bot.username)),
+                                                                                   InlineKeyboardButton(text="Our Bots",
+                                                                       url="https://t.me/SDBOTz")
+                                                                                 ]]))
+
     else:
-        update.effective_message.reply_text(
-        query.message.edit_text(
-            text=f"Hai yang disana!"
-            f"\nSupaya bisa memberi pengaturan, gunakan `/settings` atau tekan tombol yang sesuai.",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        InlineKeyboardButton(text="⚙ Pengaturan", callback_data="aboutmanu_helpgrup")
-                    ],
-                    [   
-                        InlineKeyboardButton(text="🔆 Perintah bot", callback_data="aboutmanu_howto")],
-                ]
-            ),
-        )
-      else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
                 uptime,
@@ -224,7 +158,6 @@ def start(update: Update, context: CallbackContext):
         )
 
 
-# for test purposes
 def send_start(bot, update):
     #Try to remove old message
     try:
