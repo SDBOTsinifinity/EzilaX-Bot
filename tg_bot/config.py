@@ -44,6 +44,7 @@ class Config(object):
     API_OPENWEATHER = False #Get API_OPENWEATHER FROM OFFICAL SITE https://da.gd/VAW3
     AI_API_KEY = None # Coffeehouse chatbot api key, get one from https://coffeehouse.intellivoid.info/
     WALL_API = None # Get one from https://wall.alphacoders.com/api.php
+    SPAMMERS = None
 
 
 class Production(Config):
