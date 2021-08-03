@@ -36,6 +36,22 @@ Dengan Kujang yg dipegang, saya bisa membasmi mereka semua dengan sangat mudah
 
 """
 
+buttons = [
+    [   InlineKeyboardButton(text="➕ Tambahkan ke grup ➕", url="t.me/GrupManajerBot?startgroup=start"),
+    ],
+    [   InlineKeyboardButton(text="👥 Grup", url="https://t.me/nothingspecialonhere/10"),
+        InlineKeyboardButton(text="Channel 📢", url="https://t.me/nothingspecialonhere/10"),
+    ],
+    [
+        InlineKeyboardButton(text="🔧 Bantuan",callback_data="help_back"),
+        InlineKeyboardButton(text="Informasi 💬",callback_data="aboutmanu_"),   
+    ],
+    [    
+        InlineKeyboardButton(text="🇮🇩 Bahasa 🇮🇩",callback_data="help_back"
+        ),
+    ],
+]
+
 HELP_STRINGS = """
 
 Hello! my name *{}*.
@@ -119,13 +135,25 @@ def test(bot: Bot, update: Update):
     print(update.effective_message)
 
 @run_async
-def start(bot: Bot, update: Update, args: List[str]):
+def start(update: Update, context: CallbackContext):
+    args = context.args
+    uptime = get_readable_time((time.time() - StartTime))
     if update.effective_chat.type == "private":
         if len(args) >= 1:
             if args[0].lower() == "help":
                 send_help(update.effective_chat.id, HELP_STRINGS)
-            elif args[0].lower() == "disasters":
-                IMPORTED["disasters"].send_disasters(update)
+            elif args[0].lower().startswith("ghelp_"):
+                mod = args[0].lower().split("_", 1)[1]
+                if not HELPABLE.get(mod, False):
+                    return
+                send_help(
+                    update.effective_chat.id,
+                    HELPABLE[mod].__help__,
+                    InlineKeyboardMarkup(
+                        [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
+                    ),
+                )
+
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
                 chat = dispatcher.bot.getChat(match.group(1))
@@ -139,25 +167,29 @@ def start(bot: Bot, update: Update, args: List[str]):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                TECHNO_IMG,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                ),
+            update.effective_message.reply_text(
+                PM_START_TEXT,
+                reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕", url="t.me/PrabuXRobot?startgroup=start"),
-                        ],
-                        [
-                            InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ", callback_data="help_back"),
-                            InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬", url="https://t.me/PrabuXSupport")],
-                    ]
-                ),
+                timeout=60,
             )
+    else:
+        update.effective_message.reply_text(
+        query.message.edit_text(
+            text=f"Hai yang disana!"
+            f"\nSupaya bisa memberi pengaturan, gunakan `/settings` atau tekan tombol yang sesuai.",
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(text="⚙ Pengaturan", callback_data="aboutmanu_helpgrup")
+                    ],
+                    [   
+                        InlineKeyboardButton(text="🔆 Perintah bot", callback_data="aboutmanu_howto")],
+                ]
+            ),
+        )
 
     else:
         update.effective_message.reply_text("hi, I am now Online")
