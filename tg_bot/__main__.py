@@ -151,9 +151,8 @@ def start(bot: Bot, update: Update, args: List[str]):
                     InlineKeyboardButton(text="🙎🏻‍♂ ᴀssɪsᴛᴀɴᴛ", 
                       url="https://t.me/SDBOTs_inifinity")], 
                     InlineKeyboardButton(text="ᴅᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻", 
-                      url="https://t.me/SDBOTz")
-                ],[
-                    InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨", 
+                      url="https://t.me/SDBOTz")],
+                    [InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨", 
                       callback_data="help_back".format(bot.username)]]))
 
     else:
