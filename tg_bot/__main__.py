@@ -1,4 +1,5 @@
 import importlib
+import time
 import re
 import json
 import requests
@@ -23,6 +24,30 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
+
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
 
 
 PM_START_TEXT = """
@@ -190,10 +215,16 @@ def start(update: Update, context: CallbackContext):
                 ]
             ),
         )
-    else:
-        update.effective_message.reply_text("hi, I am now Online")
+else:
+        update.effective_message.reply_text(
+            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+                uptime,
+            ),
+            parse_mode=ParseMode.HTML,
+        )
 
 
+# for test purposes
 def send_start(bot, update):
     #Try to remove old message
     try:
