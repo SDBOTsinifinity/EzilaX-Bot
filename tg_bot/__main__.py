@@ -142,14 +142,35 @@ def start(bot: Bot, update: Update, args: List[str]):
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
                 TECHNO_IMG,
-                PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
-                parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕",
-                                                                       url="t.me/{}?startgroup=true".format(bot.username)],
-                                                                                   [InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ",
-                                                                       callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
-                                                                       url="https://t.me/PrabuXSupport")
-                                                                                 ]]))
+                PM_START_TEXT.format(
+                    escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
+                ),
+                parse_mode=ParseMode.MARKDOWN, 
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕",
+                                url="t.me/{}?startgroup=true".format(
+                                     bot.username,
+                                ),
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="⚔ ʙᴀɴᴛᴜᴀɴ",
+                                callback_data="help_back".format(
+                                      bot.username,
+                                ),
+                            ),
+                            InlineKeyboardButton(
+                                text="sᴜᴘᴘᴏʀᴛ 💬",
+                                url="https://t.me/PrabuXSupport"
+                            ),
+                        ],
+                    ],
+                ),
+            ),
 
     else:
         update.effective_message.reply_text("hi, I am now Online")
