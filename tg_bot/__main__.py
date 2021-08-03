@@ -145,11 +145,11 @@ def start(bot: Bot, update: Update, args: List[str]):
                 PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_ID),
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="➕ ᴛᴀᴍʙᴀʜᴋᴀɴ ᴋᴇ ɢʀᴏᴜᴘ ➕",
                                                                        url="t.me/{}?startgroup=true".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨",
+                                                                                   [InlineKeyboardButton(text="✨ ᴄʜᴀɴɴᴇʟ ✨",
                                                                        url="https://t.me/PrabuXOfficial")],
-                                                                                   [InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ",
+                                                                                   InlineKeyboardButton(text="⚔ ʙᴀɴᴛᴜᴀɴ",
                                                                        callback_data="help_back".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
+                                                                                   [InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 💬",
                                                                        url="https://t.me/PrabuXSupport")
                                                                                  ]]))
 
