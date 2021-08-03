@@ -156,7 +156,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                         [
                             InlineKeyboardButton(
                                 text="⚔ ʙᴀɴᴛᴜᴀɴ",
-                                callback_data="help_back".format(bot.username)),
+                                callback_data="help_back".format(bot.username,
                             ),
                             InlineKeyboardButton(
                                 text="sᴜᴘᴘᴏʀᴛ 💬",
