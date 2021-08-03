@@ -25,10 +25,10 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 
 
-PM_START_TEXT = """
-**Hello {}, My Name is {}!** 
-I am an **ADVANCE**  group management bot.
-You can find the list of available commands with /help.
+PM_START_TEXT = f"""<b>Hallo {message.from_user.mention} Nama saya [{}](https://t.me/PrabuXRobot)\n
+Saya Adalah Bot Canggih Yang Dibuat Untuk Memutar Musik Di Obrolan Suara Grup Telegram\n
+Ketik » /help « Untuk Melihat Daftar Perintah Saya!
+</b>"""
 
 """
 
