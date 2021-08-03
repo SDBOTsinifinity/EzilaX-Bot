@@ -146,11 +146,11 @@ def start(bot: Bot, update: Update, args: List[str]):
                 parse_mode=ParseMode.MARKDOWN, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="❔ Help ❔",
                                                                        callback_data="help_back".format(bot.username)),
                                                                                    InlineKeyboardButton(text="Channel",
-                                                                       url="https://t.me/SDBOTs_inifinity")],
+                                                                       url="https://t.me/PrabuXOfficial")],
                                                                                    [InlineKeyboardButton(text="➕ Add To Me Your Group ➕",
                                                                        url="t.me/{}?startgroup=true".format(bot.username)),
-                                                                                   InlineKeyboardButton(text="Our Bots",
-                                                                       url="https://t.me/SDBOTz")
+                                                                                   InlineKeyboardButton(text="Support",
+                                                                       url="https://t.me/PrabuXSupport")
                                                                                  ]]))
 
     else:
